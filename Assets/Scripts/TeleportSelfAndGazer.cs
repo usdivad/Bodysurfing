@@ -82,7 +82,9 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 
 	public void TeleportRandomly() {
 		// Teleport gazer
-		// TODO
+		CameraBehavior gazer = GameObject.Find ("Main Camera").GetComponent<CameraBehavior>();
+		gazer.SetMostRecentTeleportPosition (transform.localPosition);
+		gazer.SetShouldTeleport (true);
 
 		// Teleport self
 		Vector3 direction = Random.onUnitSphere;
