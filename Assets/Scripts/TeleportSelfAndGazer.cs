@@ -24,23 +24,22 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	private int framesGazedAt;
 
 	void Start() {
-		startingPosition = transform.localPosition;
+		this.startingPosition = transform.localPosition;
 		//GetComponent<Renderer> ().material.color = Color.green;
 		SetGazedAt(false);
 	}
 
 	void Update() {
 		// Update how long we've been gazed at
-		if (isGazedAt) {
-			framesGazedAt++;
+		if (this.isGazedAt) {
+			this.framesGazedAt++;
 		}
 
 		// Adjust dimensions based on gazed time
-		transform.localScale = ((float)framesGazedAt / framesGazedAtThreshold) * new Vector3(1.0f, 1.0f, 1.0f) + new Vector3(0.5f, 0.5f, 0.5f);
-		Debug.Log (transform.localScale);
+		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * new Vector3(1.0f, 1.0f, 1.0f) + new Vector3(0.5f, 0.5f, 0.5f);
 
 		// Teleport if we're over the gazed threshold
-		if (framesGazedAt >= framesGazedAtThreshold) {
+		if (this.framesGazedAt >= this.framesGazedAtThreshold) {
 			TeleportRandomly();
 		}
 	}
@@ -52,14 +51,18 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		}
 	}
 
+	public bool GetIsGazedAt() {
+		return this.isGazedAt;
+	}
+
 	public void SetGazedAt(bool gazedAt) {
-		isGazedAt = gazedAt;
-		framesGazedAt = 0;
+		this.isGazedAt = gazedAt;
+		this.framesGazedAt = 0;
 		GetComponent<Renderer>().material.color = gazedAt ? Color.blue : Color.grey;
 	}
 
 	public void Reset() {
-		transform.localPosition = startingPosition;
+		transform.localPosition = this.startingPosition;
 	}
 
 	public void ToggleVRMode() {
