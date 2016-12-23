@@ -17,12 +17,32 @@ using System.Collections;
 
 [RequireComponent(typeof(Collider))]
 public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
+	public int framesGazedAtThreshold = 120;
+
 	private Vector3 startingPosition;
+	private bool isGazedAt;
+	private int framesGazedAt;
 
 	void Start() {
 		startingPosition = transform.localPosition;
 		//GetComponent<Renderer> ().material.color = Color.green;
 		SetGazedAt(false);
+	}
+
+	void Update() {
+		// Update how long we've been gazed at
+		if (isGazedAt) {
+			framesGazedAt++;
+		}
+
+		// Adjust dimensions based on gazed time
+		transform.localScale = ((float)framesGazedAt / framesGazedAtThreshold) * new Vector3(1.0f, 1.0f, 1.0f) + new Vector3(0.5f, 0.5f, 0.5f);
+		Debug.Log (transform.localScale);
+
+		// Teleport if we're over the gazed threshold
+		if (framesGazedAt >= framesGazedAtThreshold) {
+			TeleportRandomly();
+		}
 	}
 
 	void LateUpdate() {
@@ -33,6 +53,8 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	}
 
 	public void SetGazedAt(bool gazedAt) {
+		isGazedAt = gazedAt;
+		framesGazedAt = 0;
 		GetComponent<Renderer>().material.color = gazedAt ? Color.blue : Color.grey;
 	}
 
@@ -56,6 +78,10 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	#endif  //  !UNITY_HAS_GOOGLEVR || UNITY_EDITOR
 
 	public void TeleportRandomly() {
+		// Teleport gazer
+		// TODO
+
+		// Teleport self
 		Vector3 direction = Random.onUnitSphere;
 		direction.y = Mathf.Clamp(direction.y, 0.5f, 1f);
 		float distance = 2 * Random.value + 1.5f;
