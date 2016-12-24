@@ -44,4 +44,7 @@ GvrIgnoreManifestMergeCheck.txt
 # Project dirs #
 # ============ #
 Bodysurfing_iOS/
+TexturePSDs/
 *.app
+Assets/LooperRec.*
+permgram.py
