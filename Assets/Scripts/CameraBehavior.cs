@@ -8,9 +8,10 @@ public class CameraBehavior : MonoBehaviour {
 	private float maxVel;
 	private float velStep;
 	private Vector3 mostRecentForward;
+	private Vector3 mostRecentGazePosition; // Last position we were at before we started gazing
 
 	private bool isGazing;
-	private Vector3 mostRecentTeleportPosition;
+	private Vector3 mostRecentTeleportPosition; // Last position we teleported to
 	private bool shouldTeleport;
 
 	// Use this for initialization
@@ -20,6 +21,7 @@ public class CameraBehavior : MonoBehaviour {
 		this.curVel = this.minVel;
 		this.velStep = 0.001f;
 		this.mostRecentForward = new Vector3 (0, 0, 0);
+		this.mostRecentGazePosition = new Vector3 (0, 0, 0);
 
 		this.isGazing = false;
 		this.mostRecentTeleportPosition = new Vector3 (0, 0, 0);
@@ -40,9 +42,11 @@ public class CameraBehavior : MonoBehaviour {
 
 			// Look in the opposite direction 
 			// TODO: fix this!
+
 			//transform.forward = transform.forward * -1;
 			//Debug.Log ("teleport: " + transform.forward * -1 + " -> " + transform.forward);
-			transform.Rotate(new Vector3(0, 180, 0));
+
+			//transform.Rotate(new Vector3(0, 90, 0));
 		}
 
 		// Accelerate forward in the direction that the camera is facing...
@@ -73,6 +77,9 @@ public class CameraBehavior : MonoBehaviour {
 	}
 
 	public void SetIsGazing(bool gazing) {
+		if (gazing && !this.isGazing) {
+			this.mostRecentGazePosition = this.transform.localPosition;
+		}
 		this.isGazing = gazing;
 	}
 
@@ -86,5 +93,9 @@ public class CameraBehavior : MonoBehaviour {
 
 	public void SetShouldTeleport(bool teleport) {
 		this.shouldTeleport = teleport;
+	}
+
+	public Vector3 GetMostRecentGazePosition() {
+		return this.mostRecentGazePosition;
 	}
 }
