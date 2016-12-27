@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class CameraBehavior : MonoBehaviour {
+	public int framesDisembodiedThreshold = 60 * 5; // 60 fps * n seconds
 
 	private float curVel;
 	private float minVel;
@@ -13,6 +14,9 @@ public class CameraBehavior : MonoBehaviour {
 	private bool isGazing;
 	private Vector3 mostRecentTeleportPosition; // Last position we teleported to
 	private bool shouldTeleport;
+
+	private bool isDisembodied;
+	private int framesDisembodied;
 
 	// Use this for initialization
 	void Start () {
@@ -26,6 +30,8 @@ public class CameraBehavior : MonoBehaviour {
 		this.isGazing = false;
 		this.mostRecentTeleportPosition = new Vector3 (0, 0, 0);
 		this.shouldTeleport = false;
+		this.isDisembodied = false;
+		this.framesDisembodied = 0;
 	}
 	
 	// Update is called once per frame
@@ -33,12 +39,18 @@ public class CameraBehavior : MonoBehaviour {
 		// Setup transform and position vars
 		Transform transform = this.GetComponent<Transform> ();
 		Vector3 pos = transform.position;
-		Debug.Log ("euler angles: " + transform.localEulerAngles);
+		// Debug.Log ("euler angles: " + transform.localEulerAngles);
 
 		// Teleport if necessary
 		if (this.shouldTeleport) {
 			pos = this.mostRecentTeleportPosition;
 			this.shouldTeleport = false;
+			this.isDisembodied = !this.isDisembodied;
+			this.framesDisembodied = 0;
+
+			if (!this.isDisembodied) {
+				GameObject.Find ("GazerAvatar").transform.localPosition = new Vector3 (25, 0, 0);
+			}
 
 			// Look in the opposite direction 
 			// TODO: fix this!
@@ -49,19 +61,31 @@ public class CameraBehavior : MonoBehaviour {
 			//transform.Rotate(new Vector3(0, 90, 0));
 		}
 
-		// Accelerate forward in the direction that the camera is facing...
-		if (transform.forward == this.mostRecentForward) {
-			this.curVel += this.velStep;
+		if (this.isDisembodied) {
+			this.framesDisembodied++;
+			// Debug.Log ("frames disembodied: " + this.framesDisembodied);
+			if (this.framesDisembodied > this.framesDisembodiedThreshold) {
+				this.SetShouldTeleport (true);
+				this.mostRecentTeleportPosition = this.mostRecentGazePosition;
+			}
+
+			// Accelerate forward in the direction that the camera is facing...
+			if (transform.forward == this.mostRecentForward) {
+				this.curVel += this.velStep;
+			} else {
+				// this.curVel -= this.velStep;
+				this.curVel = this.minVel;
+			}
+			this.curVel = Mathf.Min (Mathf.Max (this.curVel, this.minVel), this.maxVel);
 		}
 		else {
-			// this.curVel -= this.velStep;
-			this.curVel = this.minVel;
-		}
-		this.curVel = Mathf.Min (Mathf.Max (this.curVel, this.minVel), this.maxVel);
-
-		// ... or steadily back away if I'm gazing
-		if (this.isGazing) {
-			this.curVel = this.minVel * -1;
+			// ... or steadily back away if I'm gazing
+			if (this.isGazing) {
+				this.curVel = this.minVel * -1;
+			}
+			else {
+				this.curVel = 0;
+			}
 		}
 
 		// Create movement vector
@@ -77,6 +101,11 @@ public class CameraBehavior : MonoBehaviour {
 	}
 
 	public void SetIsGazing(bool gazing) {
+		if (this.isDisembodied) {
+			this.isGazing = false;
+			return;
+		}
+
 		if (gazing && !this.isGazing) {
 			this.mostRecentGazePosition = this.transform.localPosition;
 		}
@@ -97,5 +126,9 @@ public class CameraBehavior : MonoBehaviour {
 
 	public Vector3 GetMostRecentGazePosition() {
 		return this.mostRecentGazePosition;
+	}
+
+	public bool GetIsDisembodied() {
+		return this.isDisembodied;
 	}
 }

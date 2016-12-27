@@ -34,6 +34,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		if (this.isGazedAt) {
 			this.framesGazedAt++;
 		}
+		// Debug.Log ("framesGAzedAt: " + this.framesGazedAt);
 
 		// Adjust dimensions based on gazed time
 		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * new Vector3(1.0f, 1.0f, 1.0f) + new Vector3(0.5f, 0.5f, 0.5f);
@@ -105,7 +106,11 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	/// Called when the user is looking on a GameObject with this script,
 	/// as long as it is set to an appropriate layer (see GvrGaze).
 	public void OnGazeEnter() {
-		SetGazedAt(true);
+		CameraBehavior gazer = GameObject.Find ("Main Camera").GetComponent<CameraBehavior>();
+		if (!gazer.GetIsDisembodied ()) {
+			Debug.Log ("gazing!");
+			SetGazedAt (true);
+		}
 	}
 
 	/// Called when the user stops looking on the GameObject, after OnGazeEnter
