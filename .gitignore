@@ -43,7 +43,7 @@ GvrIgnoreManifestMergeCheck.txt
 # ============ #
 # Project dirs #
 # ============ #
-Bodysurfing_iOS/
+Yektrop_iOS/
 TexturePSDs/
 *.app
 Assets/LooperRec.*
