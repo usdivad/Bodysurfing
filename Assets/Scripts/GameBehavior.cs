@@ -2,8 +2,8 @@
 using System.Collections;
 
 public class GameBehavior : MonoBehaviour {
-	public Transform entity;
-	public int numEntities = 50;
+	public Transform entity; // CitizenAvatar
+	public int numEntities; // 50
 
 	private GameObject camera;
 	private Transform[] entities;

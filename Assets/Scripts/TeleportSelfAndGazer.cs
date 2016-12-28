@@ -17,7 +17,7 @@ using System.Collections;
 
 [RequireComponent(typeof(Collider))]
 public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
-	public int framesGazedAtThreshold = 120;
+	public int framesGazedAtThreshold; // 60 (1s)
 
 	private Vector3 startingPosition;
 	private bool isGazedAt;
@@ -37,7 +37,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		// Debug.Log ("framesGAzedAt: " + this.framesGazedAt);
 
 		// Adjust dimensions based on gazed time
-		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * new Vector3(1.0f, 1.0f, 1.0f) + new Vector3(0.5f, 0.5f, 0.5f);
+		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * new Vector3(0.5f, 0.5f, 0.5f) + new Vector3(0.5f, 0.5f, 0.5f);
 
 		// Teleport if we're over the gazed threshold
 		if (this.framesGazedAt >= this.framesGazedAtThreshold) {

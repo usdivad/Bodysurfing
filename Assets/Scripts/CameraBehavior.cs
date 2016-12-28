@@ -2,12 +2,12 @@
 using System.Collections;
 
 public class CameraBehavior : MonoBehaviour {
-	public int framesDisembodiedThreshold = 60 * 5; // 60 fps * n seconds
+	public int framesDisembodiedThreshold; // 60 fps * n seconds
+	public float minVel; // 0.01f
+	public float maxVel; // 0.2f
+	public float velStep; // 0.0001f
 
 	private float curVel;
-	private float minVel;
-	private float maxVel;
-	private float velStep;
 	private Vector3 mostRecentForward;
 	private Vector3 mostRecentGazePosition; // Last position we were at before we started gazing
 
@@ -20,10 +20,7 @@ public class CameraBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		this.minVel = 0.01f;
-		this.maxVel = 0.2f;
 		this.curVel = this.minVel;
-		this.velStep = 0.001f;
 		this.mostRecentForward = new Vector3 (0, 0, 0);
 		this.mostRecentGazePosition = new Vector3 (0, 0, 0);
 
