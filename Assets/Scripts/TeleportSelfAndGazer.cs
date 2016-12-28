@@ -108,7 +108,6 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	public void OnGazeEnter() {
 		CameraBehavior gazer = GameObject.Find ("Main Camera").GetComponent<CameraBehavior>();
 		if (!gazer.GetIsDisembodied ()) {
-			Debug.Log ("gazing!");
 			SetGazedAt (true);
 		}
 	}
