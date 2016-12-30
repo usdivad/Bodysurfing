@@ -42,7 +42,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 
 		// Teleport if we're over the gazed threshold
 		if (this.framesGazedAt >= this.framesGazedAtThreshold) {
-			TeleportRandomly();
+			Teleport();
 		}
 	}
 
@@ -82,7 +82,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	}
 	#endif  //  !UNITY_HAS_GOOGLEVR || UNITY_EDITOR
 
-	public void TeleportRandomly() {
+	public void Teleport() {
 		// Teleport gazer
 		CameraBehavior gazer = GameObject.Find ("Main Camera").GetComponent<CameraBehavior>();
 		//Vector3 gazerPrevPosition = GameObject.Find ("Main Camera").transform.localPosition;
@@ -90,13 +90,16 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		gazer.SetShouldTeleport (true);
 
 		// Teleport self randomly
-		Vector3 direction = Random.onUnitSphere;
-		direction.y = Mathf.Clamp(direction.y, 0.5f, 1f);
-		float distance = 2 * Random.value + 1.5f;
-		transform.localPosition = direction * distance; // transform.parent?
+//		Vector3 direction = Random.onUnitSphere;
+//		direction.y = Mathf.Clamp(direction.y, 0.5f, 1f);
+//		float distance = 2 * Random.value + 1.5f;
+//		transform.localPosition = direction * distance; // transform.parent?
 
 		// Teleport self to gazer's previous position
 		// transform.localPosition = gazerPrevPosition;
+
+		// Teleport self outside world bounds (disappear)
+		transform.localPosition = new Vector3 (25, 0, 0);
 
 		// Teleport gazer avatar to gazer's previous position
 		GameObject.Find("GazerAvatar").transform.localPosition = gazer.GetMostRecentGazePosition();
@@ -121,7 +124,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 
 	/// Called when the viewer's trigger is used, between OnGazeEnter and OnGazeExit.
 	public void OnGazeTrigger() {
-		TeleportRandomly();
+		Teleport();
 	}
 
 	#endregion

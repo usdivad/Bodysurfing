@@ -10,6 +10,7 @@ public class CameraBehavior : MonoBehaviour {
 	private float curVel;
 	private Vector3 mostRecentForward;
 	private Vector3 mostRecentGazePosition; // Last position we were at before we started gazing
+	private int mostRecentGazeIndex;
 
 	private bool isGazing;
 	private Vector3 mostRecentTeleportPosition; // Last position we teleported to
@@ -23,6 +24,7 @@ public class CameraBehavior : MonoBehaviour {
 		this.curVel = this.minVel;
 		this.mostRecentForward = new Vector3 (0, 0, 0);
 		this.mostRecentGazePosition = new Vector3 (0, 0, 0);
+		this.mostRecentGazeIndex = -1;
 
 		this.isGazing = false;
 		this.mostRecentTeleportPosition = new Vector3 (0, 0, 0);
@@ -47,6 +49,7 @@ public class CameraBehavior : MonoBehaviour {
 
 			if (!this.isDisembodied) {
 				GameObject.Find ("GazerAvatar").transform.localPosition = new Vector3 (25, 0, 0);
+				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().teleportEntity (this.mostRecentGazeIndex, this.transform.position);
 			}
 
 			// Look in the opposite direction 
@@ -97,7 +100,9 @@ public class CameraBehavior : MonoBehaviour {
 		transform.position = pos;
 	}
 
-	public void SetIsGazing(bool gazing) {
+	public void SetIsGazingAt(int gazingAt) {
+		bool gazing = gazingAt >= 0;
+
 		if (this.isDisembodied) {
 			this.isGazing = false;
 			return;
@@ -105,6 +110,7 @@ public class CameraBehavior : MonoBehaviour {
 
 		if (gazing && !this.isGazing) {
 			this.mostRecentGazePosition = this.transform.localPosition;
+			this.mostRecentGazeIndex = gazingAt;
 		}
 		this.isGazing = gazing;
 	}
