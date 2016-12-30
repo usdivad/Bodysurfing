@@ -18,6 +18,7 @@ using System.Collections;
 [RequireComponent(typeof(Collider))]
 public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	public int framesGazedAtThreshold; // 60 (1s)
+	public float scaleFactor; // 0.5f
 
 	private Vector3 startingPosition;
 	private bool isGazedAt;
@@ -33,11 +34,11 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		// Update how long we've been gazed at
 		if (this.isGazedAt) {
 			this.framesGazedAt++;
+			Debug.Log ("framesGAzedAt: " + this.framesGazedAt);
 		}
-		// Debug.Log ("framesGAzedAt: " + this.framesGazedAt);
 
 		// Adjust dimensions based on gazed time
-		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * new Vector3(0.5f, 0.5f, 0.5f) + new Vector3(0.5f, 0.5f, 0.5f);
+		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * new Vector3(scaleFactor, scaleFactor, scaleFactor) + new Vector3(scaleFactor, scaleFactor, scaleFactor);
 
 		// Teleport if we're over the gazed threshold
 		if (this.framesGazedAt >= this.framesGazedAtThreshold) {
@@ -92,7 +93,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		Vector3 direction = Random.onUnitSphere;
 		direction.y = Mathf.Clamp(direction.y, 0.5f, 1f);
 		float distance = 2 * Random.value + 1.5f;
-		transform.localPosition = direction * distance;
+		transform.localPosition = direction * distance; // transform.parent?
 
 		// Teleport self to gazer's previous position
 		// transform.localPosition = gazerPrevPosition;

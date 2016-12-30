@@ -17,7 +17,9 @@ public class GameBehavior : MonoBehaviour {
 		for (int i = 0; i < this.numEntities; i++) {
 			float x = Random.Range (-10, 10);
 			float z = Random.Range (-10, 10);
-			Transform entity = (Transform) Instantiate (this.entity, new Vector3 (x, 1, z), Quaternion.identity);
+			Transform entity = (Transform) Instantiate (this.entity, new Vector3 (x, 2, z), Quaternion.identity);
+			//entity.localScale = new Vector3 (0.01f, 0.01f, 0.01f);
+			entity.Rotate (new Vector3 (0, Random.value * 360.0f, 0));
 			this.entities [i] = entity;
 		}
 	}
