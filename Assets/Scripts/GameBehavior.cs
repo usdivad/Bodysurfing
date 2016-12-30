@@ -21,6 +21,7 @@ public class GameBehavior : MonoBehaviour {
 			Transform entity = (Transform) Instantiate (entityType, new Vector3 (x, 1, z), Quaternion.identity);
 			//entity.localScale = new Vector3 (0.01f, 0.01f, 0.01f);
 			entity.Rotate (new Vector3 (0, Random.value * 360.0f, 0));
+			entity.GetComponent<TargetWatcherBehavior> ().target = camera;
 			this.entities [i] = entity;
 		}
 	}
