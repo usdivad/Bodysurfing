@@ -53,7 +53,7 @@ public class CameraBehavior : MonoBehaviour {
 			}
 
 			// Look in the opposite direction 
-			// TODO: fix this!
+			// TODO: fix this! has to override some of the VR settings
 
 			//transform.forward = transform.forward * -1;
 			//Debug.Log ("teleport: " + transform.forward * -1 + " -> " + transform.forward);

@@ -21,11 +21,13 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	public float scaleFactor; // 0.5f
 
 	private Vector3 startingPosition;
+	private Vector3 startingScale;
 	private bool isGazedAt;
 	private int framesGazedAt;
 
 	void Start() {
 		this.startingPosition = transform.localPosition;
+		this.startingScale = transform.localScale;
 		//GetComponent<Renderer> ().material.color = Color.green;
 		SetGazedAt(false);
 	}
@@ -38,7 +40,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		}
 
 		// Adjust dimensions based on gazed time
-		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * new Vector3(scaleFactor, scaleFactor, scaleFactor) + new Vector3(scaleFactor, scaleFactor, scaleFactor);
+		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * (scaleFactor * this.startingScale) + this.startingScale;
 
 		// Teleport if we're over the gazed threshold
 		if (this.framesGazedAt >= this.framesGazedAtThreshold) {
