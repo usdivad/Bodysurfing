@@ -22,6 +22,7 @@ public class GameBehavior : MonoBehaviour {
 			//entity.localScale = new Vector3 (0.01f, 0.01f, 0.01f);
 			entity.Rotate (new Vector3 (0, Random.value * 360.0f, 0));
 			entity.GetComponent<TargetWatcherBehavior> ().target = camera;
+			entity.GetComponent<TargetWatcherBehavior> ().watchOffset = new Vector3 (0, 0, 0);
 			this.entities [i] = entity;
 		}
 	}
