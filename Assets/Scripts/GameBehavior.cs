@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class GameBehavior : MonoBehaviour {
-	public Transform[] entityTypes; // [CitizenAvatar_Female, CitizenAvatar_Male]
+	public Transform entityType;
+	public Material[] entityMaterials; // [CitizenAvatar_Female, CitizenAvatar_Male]
 	public int numEntities; // 50
 
 	private GameObject camera;
@@ -18,10 +19,11 @@ public class GameBehavior : MonoBehaviour {
 			// Instantiate and transform
 			float x = Random.Range (-10, 10);
 			float z = Random.Range (-10, 10);
-			Transform entityType = this.entityTypes[Random.Range (0, this.entityTypes.Length)];
-			Transform entity = (Transform) Instantiate (entityType, new Vector3 (x, 1, z), Quaternion.identity);
+			Material entityMaterial = this.entityMaterials[Random.Range (0, this.entityMaterials.Length)];
+			Transform entity = (Transform) Instantiate (this.entityType, new Vector3 (x, 1, z), Quaternion.identity);
 			//entity.localScale = new Vector3 (0.01f, 0.01f, 0.01f);
 			entity.Rotate (new Vector3 (0, Random.value * 360.0f, 0));
+			entity.GetComponent<MeshRenderer> ().material = entityMaterial;
 
 			// Set up target watcher behavior
 			TargetWatcherBehavior twb = entity.GetComponent<TargetWatcherBehavior> ();
