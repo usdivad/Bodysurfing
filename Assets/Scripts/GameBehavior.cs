@@ -5,6 +5,7 @@ public class GameBehavior : MonoBehaviour {
 	public Transform entityType;
 	public Material[] entityMaterials; // [CitizenAvatar_Female, CitizenAvatar_Male]
 	public int numEntities; // 50
+	public float positionRange;
 
 	private GameObject camera;
 	private Transform[] entities;
@@ -17,8 +18,8 @@ public class GameBehavior : MonoBehaviour {
 		// Instantiate all the entities
 		for (int i = 0; i < this.numEntities; i++) {
 			// Instantiate and transform
-			float x = Random.Range (-10, 10);
-			float z = Random.Range (-10, 10);
+			float x = Random.Range (positionRange*-1, positionRange);
+			float z = Random.Range (positionRange*-1, positionRange);
 			Material entityMaterial = this.entityMaterials[Random.Range (0, this.entityMaterials.Length)];
 			Transform entity = (Transform) Instantiate (this.entityType, new Vector3 (x, 1, z), Quaternion.identity);
 			//entity.localScale = new Vector3 (0.01f, 0.01f, 0.01f);

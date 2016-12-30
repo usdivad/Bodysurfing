@@ -62,7 +62,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	public void SetGazedAt(bool gazedAt) {
 		this.isGazedAt = gazedAt;
 		this.framesGazedAt = 0;
-		GetComponent<Renderer>().material.color = gazedAt ? Color.blue : Color.grey;
+		GetComponent<Renderer>().material.color = gazedAt ? Color.magenta : Color.white;
 	}
 
 	public void Reset() {
