@@ -24,9 +24,11 @@ public class GameBehavior : MonoBehaviour {
 			entity.Rotate (new Vector3 (0, Random.value * 360.0f, 0));
 
 			// Set up target watcher behavior
-			entity.GetComponent<TargetWatcherBehavior> ().target = camera;
-			entity.GetComponent<TargetWatcherBehavior> ().watchOffset = new Vector3 (0, 0, 0);
-			entity.GetComponent<TargetWatcherBehavior> ().distanceThreshold = 2.5f;
+			TargetWatcherBehavior twb = entity.GetComponent<TargetWatcherBehavior> ();
+			twb.target = camera;
+			twb.watchOffset = new Vector3 (0, 0, 0);
+			twb.distanceThreshold = 5.0f;
+			twb.rotationSpeed = Random.value * 0.5f;
 
 			this.entities [i] = entity;
 		}
