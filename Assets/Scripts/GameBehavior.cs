@@ -36,14 +36,23 @@ public class GameBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		CameraBehavior cameraBehavior = camera.GetComponent<CameraBehavior> ();
+
 		// Set camera's isGazing by querying entities
 		int cameraIsGazingAt = -1;
 		for (int i = 0; i < this.entities.Length; i++) {
 			Transform entity = this.entities [i];
-			bool isGazedAt = entity.GetComponent<TeleportSelfAndGazer> ().GetIsGazedAt ();
-			if (isGazedAt) {
-				cameraIsGazingAt = i;
-				break;
+
+			if (cameraBehavior.GetIsDisembodied ()) {
+				entity.GetComponent<TargetWatcherBehavior> ().SetBypass(false);
+			}
+			else {
+				entity.GetComponent<TargetWatcherBehavior> ().SetBypass(true);
+				bool isGazedAt = entity.GetComponent<TeleportSelfAndGazer> ().GetIsGazedAt ();
+				if (isGazedAt) {
+					cameraIsGazingAt = i;
+					// break;
+				}
 			}
 		}
 		camera.GetComponent<CameraBehavior> ().SetIsGazingAt (cameraIsGazingAt);
