@@ -15,14 +15,19 @@ public class GameBehavior : MonoBehaviour {
 
 		// Instantiate all the entities
 		for (int i = 0; i < this.numEntities; i++) {
+			// Instantiate and transform
 			float x = Random.Range (-10, 10);
 			float z = Random.Range (-10, 10);
 			Transform entityType = this.entityTypes[Random.Range (0, this.entityTypes.Length)];
 			Transform entity = (Transform) Instantiate (entityType, new Vector3 (x, 1, z), Quaternion.identity);
 			//entity.localScale = new Vector3 (0.01f, 0.01f, 0.01f);
 			entity.Rotate (new Vector3 (0, Random.value * 360.0f, 0));
+
+			// Set up target watcher behavior
 			entity.GetComponent<TargetWatcherBehavior> ().target = camera;
 			entity.GetComponent<TargetWatcherBehavior> ().watchOffset = new Vector3 (0, 0, 0);
+			entity.GetComponent<TargetWatcherBehavior> ().distanceThreshold = 2.5f;
+
 			this.entities [i] = entity;
 		}
 	}
