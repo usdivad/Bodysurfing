@@ -13,6 +13,8 @@ public class CubeAtlasBehavior : MonoBehaviour {
 	
 	}
 
+	// Set up texture map based on atlas template
+	// Adapted from http://answers.unity3d.com/answers/1140923/view.html
 	void SetupAtlas() {
 		Mesh mesh = GetComponent<MeshFilter>().mesh;
 		Vector2[] UVs = new Vector2[mesh.vertices.Length];
