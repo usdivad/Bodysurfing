@@ -37,7 +37,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		// Update how long we've been gazed at
 		if (this.isGazedAt) {
 			this.framesGazedAt++;
-			Debug.Log ("framesGAzedAt: " + this.framesGazedAt);
+			//Debug.Log ("framesGAzedAt: " + this.framesGazedAt);
 		}
 
 		// Adjust dimensions based on gazed time

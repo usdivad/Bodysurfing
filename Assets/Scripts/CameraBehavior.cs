@@ -6,6 +6,7 @@ public class CameraBehavior : MonoBehaviour {
 	public float minVel; // 0.01f
 	public float maxVel; // 0.2f
 	public float velStep; // 0.0001f
+	public float turnMagnitudeThreshold;
 
 	private float curVel;
 	private Vector3 mostRecentForward;
@@ -70,11 +71,13 @@ public class CameraBehavior : MonoBehaviour {
 			}
 
 			// Accelerate forward in the direction that the camera is facing...
-			if (transform.forward == this.mostRecentForward) {
+			float turnMagnitude = (transform.forward - this.mostRecentForward).magnitude;
+			if (turnMagnitude < this.turnMagnitudeThreshold) {
 				this.curVel += this.velStep;
 			} else {
-				// this.curVel -= this.velStep;
+				//this.curVel -= this.velStep * (turnMagnitude / this.turnMagnitudeThreshold);
 				this.curVel = this.minVel;
+				Debug.Log ("turn magnitude: " + turnMagnitude);
 			}
 			this.curVel = Mathf.Min (Mathf.Max (this.curVel, this.minVel), this.maxVel);
 		}
