@@ -16,6 +16,7 @@ using UnityEngine;
 using System.Collections;
 
 [RequireComponent(typeof(Collider))]
+[RequireComponent(typeof(Renderer))]
 public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	public int framesGazedAtThreshold; // 60 (1s)
 	public float scaleFactor; // 0.5f
@@ -104,7 +105,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		transform.localPosition = new Vector3 (25, 0, 0);
 
 		// Teleport gazer avatar to gazer's previous position
-		GameObject.Find("GazerAvatar").transform.localPosition = gazer.GetMostRecentGazePosition();
+		GameObject.Find("Gazer Avatar").transform.localPosition = gazer.GetMostRecentGazePosition();
 	}
 
 	#region IGvrGazeResponder implementation

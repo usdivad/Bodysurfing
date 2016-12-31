@@ -48,7 +48,7 @@ public class CameraBehavior : MonoBehaviour {
 			this.framesDisembodied = 0;
 
 			if (!this.isDisembodied) {
-				GameObject.Find ("GazerAvatar").transform.localPosition = new Vector3 (25, 0, 0);
+				GameObject.Find ("Gazer Avatar").transform.localPosition = new Vector3 (25, 0, 0);
 				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().teleportEntity (this.mostRecentGazeIndex, this.transform.position);
 			}
 
