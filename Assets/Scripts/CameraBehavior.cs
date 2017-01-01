@@ -16,6 +16,7 @@ public class CameraBehavior : MonoBehaviour {
 	private bool isGazing;
 	private Vector3 mostRecentTeleportPosition; // Last position we teleported to
 	private bool shouldTeleport;
+	private int framesSinceLastTeleportation;
 
 	private bool isDisembodied;
 	private int framesDisembodied;
@@ -30,6 +31,8 @@ public class CameraBehavior : MonoBehaviour {
 		this.isGazing = false;
 		this.mostRecentTeleportPosition = new Vector3 (0, 0, 0);
 		this.shouldTeleport = false;
+		this.framesSinceLastTeleportation = 0;
+
 		this.isDisembodied = false;
 		this.framesDisembodied = 0;
 	}
@@ -40,6 +43,7 @@ public class CameraBehavior : MonoBehaviour {
 		Transform transform = this.GetComponent<Transform> ();
 		Vector3 pos = transform.position;
 		// Debug.Log ("euler angles: " + transform.localEulerAngles);
+		this.framesSinceLastTeleportation++;
 
 		// Teleport if necessary
 		if (this.shouldTeleport) {
@@ -60,6 +64,8 @@ public class CameraBehavior : MonoBehaviour {
 			//Debug.Log ("teleport: " + transform.forward * -1 + " -> " + transform.forward);
 
 			//transform.Rotate(new Vector3(0, 90, 0));
+
+			this.framesSinceLastTeleportation = 0;
 		}
 
 		if (this.isDisembodied) {
@@ -136,5 +142,9 @@ public class CameraBehavior : MonoBehaviour {
 
 	public bool GetIsDisembodied() {
 		return this.isDisembodied;
+	}
+
+	public int GetFramesSinceLastTeleportation() {
+		return this.framesSinceLastTeleportation;
 	}
 }
