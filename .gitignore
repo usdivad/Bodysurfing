@@ -37,6 +37,8 @@ Thumbs.db
 Plugins/
 GvrIgnoreManifestMergeCheck.txt
 fmod_editor.log
+fmod.log
+Assets/FMODStudioCache.asset
 
 # ============ #
 # Project dirs #
