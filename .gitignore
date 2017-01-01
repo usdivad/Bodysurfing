@@ -34,9 +34,6 @@ Thumbs.db
 # =============== #
 # Imported assets #
 # =============== #
-Assets/G-Audio/
-Assets/Gizmos/
-Assets/GoogleVR/
 Plugins/
 GvrIgnoreManifestMergeCheck.txt
 fmod_editor.log
