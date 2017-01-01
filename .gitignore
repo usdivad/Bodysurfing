@@ -39,12 +39,20 @@ Assets/Gizmos/
 Assets/GoogleVR/
 Plugins/
 GvrIgnoreManifestMergeCheck.txt
+fmod_editor.log
 
 # ============ #
 # Project dirs #
 # ============ #
 Yektrop_iOS/
 TexturePSDs/
+FMODAssets/Music/Build/
+FMODAssets/Music/.cache
+*.wav
+*.asd
+*.aif
+*.bank
+*.bank.meta
 *.app
 Assets/LooperRec.*
 permgram.py
