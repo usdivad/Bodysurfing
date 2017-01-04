@@ -9,6 +9,7 @@ public class CameraBehavior : MonoBehaviour {
 	public float turnMagnitudeThreshold;
 
 	private float curVel;
+	private float curVelMultiplier;
 	private Vector3 mostRecentForward;
 	private Vector3 mostRecentGazePosition; // Last position we were at before we started gazing
 	private int mostRecentGazeIndex;
@@ -24,6 +25,7 @@ public class CameraBehavior : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		this.curVel = this.minVel;
+		this.curVelMultiplier = 1.0f;
 		this.mostRecentForward = new Vector3 (0, 0, 0);
 		this.mostRecentGazePosition = new Vector3 (0, 0, 0);
 		this.mostRecentGazeIndex = -1;
@@ -98,7 +100,7 @@ public class CameraBehavior : MonoBehaviour {
 		}
 
 		// Create movement vector
-		Vector3 mvmt = transform.forward * this.curVel;
+		Vector3 mvmt = transform.forward * this.curVel * this.curVelMultiplier;
 		this.mostRecentForward = transform.forward;
 		//Quaternion rot = transform.rotation;
 		//Debug.Log (rot);
@@ -122,6 +124,14 @@ public class CameraBehavior : MonoBehaviour {
 			this.mostRecentGazeIndex = gazingAt;
 		}
 		this.isGazing = gazing;
+	}
+
+	public float GetCurVelMultiplier() {
+		return this.curVelMultiplier;
+	}
+
+	public void SetCurVelMultiplier(float mul) {
+		this.curVelMultiplier = mul;
 	}
 
 	public void SetMostRecentForward(Vector3 forward) {

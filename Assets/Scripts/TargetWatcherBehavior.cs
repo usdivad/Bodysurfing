@@ -4,8 +4,10 @@ using System.Collections;
 public class TargetWatcherBehavior : MonoBehaviour {
 	public GameObject target;
 	public Vector3 watchOffset;
-	public float distanceThreshold;
+	public float watchDistanceThreshold;
 	public float rotationSpeed;
+	public float stopDistanceThreshold;
+	public bool stopTarget;
 
 	private bool bypass;
 
@@ -22,10 +24,17 @@ public class TargetWatcherBehavior : MonoBehaviour {
 
 		Vector3 relativePos = target.transform.position - this.transform.position;
 		float distance = relativePos.magnitude;
-		if (distance < distanceThreshold) {
+		if (distance < this.watchDistanceThreshold) {
 			//this.transform.LookAt (target.transform.position + watchOffset);
 			Quaternion lookRot = Quaternion.LookRotation (relativePos);
 			this.transform.rotation = Quaternion.Lerp (this.transform.rotation, lookRot, this.rotationSpeed);
+
+
+			if (this.stopTarget && target.GetComponent<CameraBehavior>() != null) {
+				float targetVelMultiplier = Mathf.Min(Mathf.Max(distance - this.stopDistanceThreshold, 0f), 1f);
+				target.GetComponent<CameraBehavior> ().SetCurVelMultiplier (targetVelMultiplier);
+				Debug.Log ("distance: " + distance + ", vel mul: " + target.GetComponent<CameraBehavior> ().GetCurVelMultiplier ());
+			}
 		}
 	}
 

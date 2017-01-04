@@ -43,7 +43,7 @@ public class GameBehavior : MonoBehaviour {
 			TargetWatcherBehavior twb = entity.GetComponent<TargetWatcherBehavior> ();
 			twb.target = camera;
 			twb.watchOffset = new Vector3 (0, 0, 0);
-			twb.distanceThreshold = 5.0f;
+			twb.watchDistanceThreshold = 5.0f;
 			twb.rotationSpeed = Random.value * 0.5f;
 
 			this.entities [i] = entity;
