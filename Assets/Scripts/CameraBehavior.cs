@@ -7,6 +7,7 @@ public class CameraBehavior : MonoBehaviour {
 	public float maxVel; // 0.2f
 	public float velStep; // 0.0001f
 	public float turnMagnitudeThreshold;
+	public float converserDistanceThreshold;
 
 	private float curVel;
 	private float curVelMultiplier;
@@ -58,7 +59,7 @@ public class CameraBehavior : MonoBehaviour {
 
 			if (!this.isDisembodied) {
 				GameObject.Find ("Gazer Avatar").transform.localPosition = new Vector3 (25, 0, 0);
-				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().teleportEntity (this.mostRecentGazeIndex, this.transform.position);
+				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().SetEntityPosition (this.mostRecentGazeIndex, this.transform.position);
 			}
 
 			// Look in the opposite direction 
@@ -90,6 +91,23 @@ public class CameraBehavior : MonoBehaviour {
 				Debug.Log ("turn magnitude: " + turnMagnitude);
 			}
 			this.curVel = Mathf.Min (Mathf.Max (this.curVel, this.minVel), this.maxVel);
+
+			// (...but if I'm about to converse, then slow down / stop...)
+			if (this.mostRecentConverserIndex >= 0) {
+				Vector3 converserPos = GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().GetEntityPosition (this.mostRecentConverserIndex);
+				float converserDistance = (this.transform.position - converserPos).magnitude;
+				Debug.Log ("converserDistance: " + converserDistance + " (" + converserPos + ")");
+
+				// Decelerate
+				//this.curVel *= Mathf.Min(Mathf.Max ((converserDistance - this.converserDistanceThreshold) * 1.0f, 0f), 1f);
+				//this.curVel = Mathf.Max(this.curVel - this.minVel, 0f);
+
+				// Grind to a halt
+				if (converserDistance < this.converserDistanceThreshold) {
+					//this.curVel = 0;
+					this.curVel = Mathf.Max(this.curVel - this.minVel, 0f);
+				}
+			}
 		}
 		else {
 			// ... or steadily back away if I'm gazing

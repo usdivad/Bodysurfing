@@ -80,7 +80,11 @@ public class GameBehavior : MonoBehaviour {
 		cameraBehavior.SetIsAboutToConverseWith (cameraIsAboutToConverseWith);
 	}
 
-	public void teleportEntity(int i, Vector3 pos) {
+	public void SetEntityPosition(int i, Vector3 pos) { // Previously "TeleportEntity()"
 		this.entities [i].position = pos;
+	}
+
+	public Vector3 GetEntityPosition(int i) {
+		return this.entities [i].position;
 	}
 }
