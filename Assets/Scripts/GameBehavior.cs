@@ -8,12 +8,12 @@ public class GameBehavior : MonoBehaviour {
 	public float positionRange;
 	public float positionOffset;
 
-	private GameObject camera;
+	private GameObject mainCamera;
 	private Transform[] entities;
 
 	// Use this for initialization
 	void Start () {
-		camera = GameObject.Find ("Main Camera");
+		mainCamera = GameObject.Find ("Main Camera");
 		this.entities = new Transform[numEntities];
 
 		// Instantiate all the entities
@@ -41,10 +41,10 @@ public class GameBehavior : MonoBehaviour {
 
 			// Set up target watcher behavior
 			TargetWatcherBehavior twb = entity.GetComponent<TargetWatcherBehavior> ();
-			twb.target = camera;
+			twb.target = mainCamera;
 			twb.watchOffset = new Vector3 (0, 0, 0);
 			twb.watchDistanceThreshold = 5.0f;
-			twb.rotationSpeed = Random.value * 0.5f;
+			twb.rotationSpeed = Random.value * 0.2f + 0.1f;
 
 			this.entities [i] = entity;
 		}
@@ -52,15 +52,20 @@ public class GameBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		CameraBehavior cameraBehavior = camera.GetComponent<CameraBehavior> ();
+		CameraBehavior cameraBehavior = mainCamera.GetComponent<CameraBehavior> ();
 
 		// Set camera's isGazing by querying entities
 		int cameraIsGazingAt = -1;
+		int cameraIsAboutToConverseWith = -1;
 		for (int i = 0; i < this.entities.Length; i++) {
 			Transform entity = this.entities [i];
 
 			if (cameraBehavior.GetIsDisembodied ()) {
 				entity.GetComponent<TargetWatcherBehavior> ().SetBypass(false);
+				bool isAboutToConverse = entity.GetComponent<TeleportSelfAndGazer> ().GetIsAboutToConverse ();
+				if (isAboutToConverse) {
+					cameraIsAboutToConverseWith = i;
+				}
 			}
 			else {
 				entity.GetComponent<TargetWatcherBehavior> ().SetBypass(true);
@@ -71,7 +76,8 @@ public class GameBehavior : MonoBehaviour {
 				}
 			}
 		}
-		camera.GetComponent<CameraBehavior> ().SetIsGazingAt (cameraIsGazingAt);
+		cameraBehavior.SetIsGazingAt (cameraIsGazingAt);
+		cameraBehavior.SetIsAboutToConverseWith (cameraIsAboutToConverseWith);
 	}
 
 	public void teleportEntity(int i, Vector3 pos) {

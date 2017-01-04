@@ -25,17 +25,21 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	private Vector3 startingScale;
 	private bool isGazedAt;
 	private int framesGazedAt;
+	private bool isAboutToConverse;
 
 	void Start() {
 		this.startingPosition = transform.localPosition;
 		this.startingScale = transform.localScale;
 		//GetComponent<Renderer> ().material.color = Color.green;
 		SetGazedAt(false);
+		SetIsAboutToConverse (false);
 	}
 
 	void Update() {
+		CameraBehavior gazer = GameObject.Find ("Main Camera").GetComponent<CameraBehavior>();
+
 		// Update how long we've been gazed at
-		if (this.isGazedAt) {
+		if (this.isGazedAt && !gazer.GetIsDisembodied()) {
 			this.framesGazedAt++;
 			//Debug.Log ("framesGAzedAt: " + this.framesGazedAt);
 		}
@@ -64,6 +68,14 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		this.isGazedAt = gazedAt;
 		this.framesGazedAt = 0;
 		GetComponent<Renderer>().material.color = gazedAt ? Color.magenta : Color.white;
+	}
+
+	public bool GetIsAboutToConverse() {
+		return this.isAboutToConverse;
+	}
+
+	public void SetIsAboutToConverse(bool aboutToConverse) {
+		this.isAboutToConverse = aboutToConverse;
 	}
 
 	public void Reset() {
@@ -117,12 +129,17 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		if (!gazer.GetIsDisembodied ()) {
 			SetGazedAt (true);
 		}
+		else {
+			SetIsAboutToConverse(true);
+		}
+		Debug.Log ("gzze enger: " + this.isAboutToConverse);
 	}
 
 	/// Called when the user stops looking on the GameObject, after OnGazeEnter
 	/// was already called.
 	public void OnGazeExit() {
 		SetGazedAt(false);
+		SetIsAboutToConverse (false);
 	}
 
 	/// Called when the viewer's trigger is used, between OnGazeEnter and OnGazeExit.

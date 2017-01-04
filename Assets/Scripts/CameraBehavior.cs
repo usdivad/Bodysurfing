@@ -12,7 +12,8 @@ public class CameraBehavior : MonoBehaviour {
 	private float curVelMultiplier;
 	private Vector3 mostRecentForward;
 	private Vector3 mostRecentGazePosition; // Last position we were at before we started gazing
-	private int mostRecentGazeIndex;
+	private int mostRecentGazeIndex; // Last entity we gazed at while not disembodied
+	private int mostRecentConverserIndex; // Last entity about to engage in conversation with us
 
 	private bool isGazing;
 	private Vector3 mostRecentTeleportPosition; // Last position we teleported to
@@ -29,6 +30,7 @@ public class CameraBehavior : MonoBehaviour {
 		this.mostRecentForward = new Vector3 (0, 0, 0);
 		this.mostRecentGazePosition = new Vector3 (0, 0, 0);
 		this.mostRecentGazeIndex = -1;
+		this.mostRecentConverserIndex = -1;
 
 		this.isGazing = false;
 		this.mostRecentTeleportPosition = new Vector3 (0, 0, 0);
@@ -109,6 +111,8 @@ public class CameraBehavior : MonoBehaviour {
 
 		// Finally set transform position
 		transform.position = pos;
+
+		Debug.Log ("camera: most recent gaze idx: " + this.mostRecentGazeIndex + ", most recent converser idx: " + this.mostRecentConverserIndex);
 	}
 
 	public void SetIsGazingAt(int gazingAt) {
@@ -124,6 +128,10 @@ public class CameraBehavior : MonoBehaviour {
 			this.mostRecentGazeIndex = gazingAt;
 		}
 		this.isGazing = gazing;
+	}
+
+	public void SetIsAboutToConverseWith(int converserIndex) {
+		this.mostRecentConverserIndex = converserIndex;
 	}
 
 	public float GetCurVelMultiplier() {
