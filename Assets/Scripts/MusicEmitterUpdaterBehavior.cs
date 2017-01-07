@@ -16,8 +16,9 @@ public class MusicEmitterUpdaterBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		CameraBehavior cameraBehavior = this.GetComponent<CameraBehavior> ();
-		float rotationOffset = Mathf.Abs (this.transform.eulerAngles.y / 360);
+		GameObject mainCamera = GameObject.Find ("Main Camera");
+		CameraBehavior cameraBehavior = mainCamera.GetComponent<CameraBehavior> ();
+		float rotationOffset = Mathf.Abs (mainCamera.transform.eulerAngles.y / 360);
 		float timeSinceTeleportation = Mathf.Min (cameraBehavior.GetFramesSinceLastTeleportation () / framesSinceLastTeleportationThreshold, 1.0f);
 		//float gazeAmount = cameraBehavior.GetGazeAmount ();
 		float isDisembodiedFloat = cameraBehavior.GetIsDisembodied() ? 1.0f : 0.0f;
