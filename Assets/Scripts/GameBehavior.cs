@@ -15,10 +15,11 @@ public class GameBehavior : MonoBehaviour {
 	void Start () {
 		mainCamera = GameObject.Find ("Main Camera");
 		this.entities = new Transform[numEntities];
+		float y = 0.5f;
 
 		// Instantiate all the entities
 		for (int i = 0; i < this.numEntities; i++) {
-			// Instantiate and transform
+			// Set up transform position and rotation
 			float x = Random.Range (positionRange*-1, positionRange);
 			float z = Random.Range (positionRange*-1, positionRange);
 			if (x < 0 && x > positionOffset * -1) {
@@ -33,10 +34,12 @@ public class GameBehavior : MonoBehaviour {
 			else if (z < positionOffset) {
 				z += positionOffset;
 			}
-			Material entityMaterial = this.entityMaterials[Random.Range (0, this.entityMaterials.Length)];
-			Transform entity = (Transform) Instantiate (this.entityType, new Vector3 (x, 1, z), Quaternion.identity);
+			Transform entity = (Transform) Instantiate (this.entityType, new Vector3 (x, y, z), Quaternion.identity);
 			//entity.localScale = new Vector3 (0.01f, 0.01f, 0.01f);
 			entity.Rotate (new Vector3 (0, Random.value * 360.0f, 0));
+
+			// Set up material
+			Material entityMaterial = this.entityMaterials[Random.Range (0, this.entityMaterials.Length)];
 			entity.GetComponent<MeshRenderer> ().material = entityMaterial;
 
 			// Set up target watcher behavior
