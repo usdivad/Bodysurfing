@@ -183,4 +183,8 @@ public class CameraBehavior : MonoBehaviour {
 	public int GetFramesSinceLastTeleportation() {
 		return this.framesSinceLastTeleportation;
 	}
+
+//	public float GetGazeAmount() {
+//		float amt = 
+//	}
 }

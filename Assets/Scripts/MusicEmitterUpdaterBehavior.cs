@@ -1,4 +1,5 @@
 ﻿// Updates parameters in the FMOD Music Emitter
+// 1/7/17: Currently attached to Main Camera
 
 using UnityEngine;
 using System.Collections;
@@ -15,9 +16,14 @@ public class MusicEmitterUpdaterBehavior : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		CameraBehavior cameraBehavior = this.GetComponent<CameraBehavior> ();
 		float rotationOffset = Mathf.Abs (this.transform.eulerAngles.y / 360);
-		float timeSinceTeleportation = Mathf.Min (this.GetComponent<CameraBehavior> ().GetFramesSinceLastTeleportation () / framesSinceLastTeleportationThreshold, 1.0f);
+		float timeSinceTeleportation = Mathf.Min (cameraBehavior.GetFramesSinceLastTeleportation () / framesSinceLastTeleportationThreshold, 1.0f);
+		//float gazeAmount = cameraBehavior.GetGazeAmount ();
+		float isDisembodiedFloat = cameraBehavior.GetIsDisembodied() ? 1.0f : 0.0f;
+
 		emitter.SetParameter ("Rotation Offset", rotationOffset);
 		emitter.SetParameter ("Time Since Teleportation", timeSinceTeleportation);
+		emitter.SetParameter ("Is Disembodied?", isDisembodiedFloat);
 	}
 }
