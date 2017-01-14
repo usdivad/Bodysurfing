@@ -48,6 +48,7 @@ Yektrop_iOS/
 TexturePSDs/
 FMODAssets/Music/Build/
 FMODAssets/Music/.cache
+FMODAssets/Music/CpaghettiMockBounces*
 *.wav
 *.asd
 *.aif
