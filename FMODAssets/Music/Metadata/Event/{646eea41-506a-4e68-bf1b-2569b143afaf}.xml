@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.01.08.00">
     <object class="Event" id="{646eea41-506a-4e68-bf1b-2569b143afaf}">
         <property name="name">
-            <value>PyotrOneChord</value>
+            <value>PyotrSingleChord</value>
         </property>
         <property name="outputFormat">
             <value>2</value>
