@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{eba1cfb6-ae71-4599-83fb-3d480ec00e5c}">
+        <property name="assetPath">
+            <value>nara_snare_hit1_velLo.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2.2222222222222223</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{98ac971c-4b09-479e-88f3-982c4549c77a}</destination>
+        </relationship>
+    </object>
+</objects>

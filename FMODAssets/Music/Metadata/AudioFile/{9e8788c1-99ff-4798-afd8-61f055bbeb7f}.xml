@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{9e8788c1-99ff-4798-afd8-61f055bbeb7f}">
+        <property name="assetPath">
+            <value>kino_cym_velLo.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>5.333333333333333</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{98ac971c-4b09-479e-88f3-982c4549c77a}</destination>
+        </relationship>
+    </object>
+</objects>

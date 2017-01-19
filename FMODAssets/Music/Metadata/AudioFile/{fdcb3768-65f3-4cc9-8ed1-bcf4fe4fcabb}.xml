@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{fdcb3768-65f3-4cc9-8ed1-bcf4fe4fcabb}">
+        <property name="assetPath">
+            <value>nara_snare_roll_8th.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>2.2173696145124717</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{98ac971c-4b09-479e-88f3-982c4549c77a}</destination>
+        </relationship>
+    </object>
+</objects>

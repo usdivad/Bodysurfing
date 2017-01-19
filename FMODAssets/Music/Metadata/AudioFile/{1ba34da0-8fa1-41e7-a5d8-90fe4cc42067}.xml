@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.01.08.00">
+    <object class="AudioFile" id="{1ba34da0-8fa1-41e7-a5d8-90fe4cc42067}">
+        <property name="assetPath">
+            <value>elise_synthriller_chordD.wav</value>
+        </property>
+        <property name="frequencyInKHz">
+            <value>44.0999985</value>
+        </property>
+        <property name="channelCount">
+            <value>2</value>
+        </property>
+        <property name="length">
+            <value>8.5714285714285712</value>
+        </property>
+        <relationship name="masterAssetFolder">
+            <destination>{98ac971c-4b09-479e-88f3-982c4549c77a}</destination>
+        </relationship>
+    </object>
+</objects>
