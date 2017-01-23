@@ -2,9 +2,10 @@
 using System.Collections;
 
 public class GameBehavior : MonoBehaviour {
-	public Transform entityType;
-	public Material[] entityMaterials; // [CitizenAvatar_Female, CitizenAvatar_Male]
-	public int numEntities; // 50
+	//public Transform entityType;
+	public Transform[] entityTypes;
+	//public Material[] entityMaterials; // [CitizenAvatar_Female, CitizenAvatar_Male]
+	//public int numEntities; // 50
 	public float positionRange;
 	public float positionOffset;
 
@@ -13,12 +14,12 @@ public class GameBehavior : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		mainCamera = GameObject.Find ("Main Camera");
-		this.entities = new Transform[numEntities];
+		this.mainCamera = GameObject.Find ("Main Camera");
+		this.entities = new Transform[this.entityTypes.Length];
 		float y = 0.5f;
 
 		// Instantiate all the entities
-		for (int i = 0; i < this.numEntities; i++) {
+		for (int i = 0; i < this.entityTypes.Length; i++) {
 			// Set up transform position and rotation
 			float x = Random.Range (positionRange*-1, positionRange);
 			float z = Random.Range (positionRange*-1, positionRange);
@@ -34,13 +35,14 @@ public class GameBehavior : MonoBehaviour {
 			else if (z < positionOffset) {
 				z += positionOffset;
 			}
-			Transform entity = (Transform) Instantiate (this.entityType, new Vector3 (x, y, z), Quaternion.identity);
+			Transform entityType = entityTypes [i];
+			Transform entity = (Transform) Instantiate (entityType, new Vector3 (x, y, z), Quaternion.identity);
 			//entity.localScale = new Vector3 (0.01f, 0.01f, 0.01f);
 			entity.Rotate (new Vector3 (0, Random.value * 360.0f, 0));
 
 			// Set up material
-			Material entityMaterial = this.entityMaterials[Random.Range (0, this.entityMaterials.Length)];
-			entity.GetComponent<MeshRenderer> ().material = entityMaterial;
+			//Material entityMaterial = this.entityMaterials[Random.Range (0, this.entityMaterials.Length)];
+			//entity.GetComponent<MeshRenderer> ().material = entityMaterial;
 
 			// Set up target watcher behavior
 			TargetWatcherBehavior twb = entity.GetComponent<TargetWatcherBehavior> ();
