@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * Audio based on native Unity sound engine. Currently unused
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class AudioBehavior : MonoBehaviour {

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * Behavior that properly maps a cube atlas to a texture map
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class CubeAtlasBehavior : MonoBehaviour {

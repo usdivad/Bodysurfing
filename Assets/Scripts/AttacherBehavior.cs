@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+ * Attaches current position to another entity's position.
+ * (e.g. for FMOD music emitter attaching to camera)
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class AttacherBehavior : MonoBehaviour {

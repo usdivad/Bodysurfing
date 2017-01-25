@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/*
+ * Turn Cardboard VR mode on and off
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class VRTogglerBehavior : MonoBehaviour {

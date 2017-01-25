@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+ * Watch (turn towards, at a given speed) a given target once they reach a certain distance
+ * 
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class TargetWatcherBehavior : MonoBehaviour {

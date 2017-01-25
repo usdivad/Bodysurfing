@@ -1,5 +1,8 @@
-﻿// Updates parameters in the FMOD Music Emitter
-// 1/7/17: Currently attached to Main Camera
+﻿/*
+ * Updates parameters in the FMOD Music Emitter
+ * 1/7/17: Currently attached to Main Camera
+ *
+ */
 
 using UnityEngine;
 using System.Collections;

@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+ * Main game behavior; spawns entities and handles some gaze indexing
+ *
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class GameBehavior : MonoBehaviour {

@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿/*
+ * Camera behavior; this is the lens through which the player sees. Also handles some avatar placement
+ *
+ */
+
+using UnityEngine;
 using System.Collections;
 
 public class CameraBehavior : MonoBehaviour {
