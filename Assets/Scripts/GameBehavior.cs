@@ -1,10 +1,11 @@
 ﻿/*
- * Main game behavior; spawns entities and handles some gaze indexing
+ * Main game behavior; spawns entities, handles some gaze indexing, holds world boundaries
  *
  */
 
 using UnityEngine;
 using System.Collections;
+//using System.Collections.Generic;
 
 public class GameBehavior : MonoBehaviour {
 	//public Transform entityType;
@@ -13,17 +14,22 @@ public class GameBehavior : MonoBehaviour {
 	//public int numEntities; // 50
 	public float positionRange;
 	public float positionOffset;
+	//public float[] worldBoundariesArr;
+	public Vector2 worldBoundariesX;
+	public Vector2 worldBoundariesZ;
 
 	private GameObject mainCamera;
 	private Transform[] entities;
+	//private Dictionary<string, float> worldBoundariesDict;
 
 	// Use this for initialization
 	void Start () {
+		// Set up member variables
 		this.mainCamera = GameObject.Find ("Main Camera");
 		this.entities = new Transform[this.entityTypes.Length];
-		float y = 0.5f;
 
 		// Instantiate all the entities
+		float y = 0.5f;
 		for (int i = 0; i < this.entityTypes.Length; i++) {
 			// Set up transform position and rotation
 			float x = Random.Range (positionRange*-1, positionRange);
@@ -96,5 +102,15 @@ public class GameBehavior : MonoBehaviour {
 
 	public Vector3 GetEntityPosition(int i) {
 		return this.entities [i].position;
+	}
+
+	public bool PositionIsInWorldBoundaries(Vector3 pos) {
+		if (pos.x < this.worldBoundariesX.x || pos.x > this.worldBoundariesX.y) {
+			return false;
+		}
+		if (pos.z < this.worldBoundariesZ.x || pos.z > this.worldBoundariesZ.y) {
+			return false;
+		}
+		return true;
 	}
 }

@@ -84,6 +84,7 @@ public class CameraBehavior : MonoBehaviour {
 			this.framesSinceLastTeleportation = 0;
 		}
 
+		// Make adjustments based on state of disembodiment
 		if (this.isDisembodied) {
 			this.framesDisembodied++;
 			// Debug.Log ("frames disembodied: " + this.framesDisembodied);
@@ -139,10 +140,12 @@ public class CameraBehavior : MonoBehaviour {
 		pos.x += mvmt.x;
 		pos.z += mvmt.z;
 
-		// Finally set transform position
-		transform.position = pos;
+		// Finally set transform position (if position is within world boundaries)
+		if (GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().PositionIsInWorldBoundaries (pos)) {
+			transform.position = pos;
+		}
 
-		Debug.Log ("camera: most recent gaze idx: " + this.mostRecentGazeIndex + ", most recent converser idx: " + this.mostRecentConverserIndex);
+		//Debug.Log ("camera: most recent gaze idx: " + this.mostRecentGazeIndex + ", most recent converser idx: " + this.mostRecentConverserIndex);
 	}
 
 	public void SetIsGazingAt(int gazingAt) {
