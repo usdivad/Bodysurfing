@@ -67,10 +67,11 @@ public class CameraBehavior : MonoBehaviour {
 			// Adjust avatar positions
 			if (this.isDisembodied) {
 				GameObject.Find ("Gazer Avatar").transform.localPosition = this.initialPosition;
+				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().SetEntityPosition (this.mostRecentGazeIndex, new Vector3(25, 0, 0));
 			}
 			else {
 				GameObject.Find ("Gazer Avatar").transform.localPosition = new Vector3 (25, 0, 0);
-				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().SetEntityPosition (this.mostRecentGazeIndex, this.transform.position);
+				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().SetEntityPosition (this.mostRecentGazeIndex, pos);
 			}
 
 			// Look in the opposite direction 
@@ -100,7 +101,7 @@ public class CameraBehavior : MonoBehaviour {
 			} else {
 				//this.curVel -= this.velStep * (turnMagnitude / this.turnMagnitudeThreshold);
 				this.curVel = this.minVel;
-				Debug.Log ("turn magnitude: " + turnMagnitude);
+				//Debug.Log ("turn magnitude: " + turnMagnitude);
 			}
 			this.curVel = Mathf.Min (Mathf.Max (this.curVel, this.minVel), this.maxVel);
 
@@ -108,7 +109,7 @@ public class CameraBehavior : MonoBehaviour {
 			if (this.mostRecentConverserIndex >= 0) {
 				Vector3 converserPos = GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().GetEntityPosition (this.mostRecentConverserIndex);
 				float converserDistance = (this.transform.position - converserPos).magnitude;
-				Debug.Log ("converserDistance: " + converserDistance + " (" + converserPos + ")");
+				//Debug.Log ("converserDistance: " + converserDistance + " (" + converserPos + ")");
 
 				// Decelerate
 				//this.curVel *= Mathf.Min(Mathf.Max ((converserDistance - this.converserDistanceThreshold) * 1.0f, 0f), 1f);
@@ -145,7 +146,7 @@ public class CameraBehavior : MonoBehaviour {
 			transform.position = pos;
 		}
 
-		//Debug.Log ("camera: most recent gaze idx: " + this.mostRecentGazeIndex + ", most recent converser idx: " + this.mostRecentConverserIndex);
+		Debug.Log ("camera: most recent gaze idx: " + this.mostRecentGazeIndex + ", most recent converser idx: " + this.mostRecentConverserIndex);
 	}
 
 	public void SetIsGazingAt(int gazingAt) {
@@ -181,6 +182,10 @@ public class CameraBehavior : MonoBehaviour {
 
 	public void SetMostRecentTeleportPosition(Vector3 position) {
 		this.mostRecentTeleportPosition = position;
+	}
+
+	public void SetMostRecentAvatarPosition(Vector3 position) {
+		GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().SetEntityPosition (this.mostRecentGazeIndex, position);
 	}
 
 	public void SetShouldTeleport(bool teleport) {

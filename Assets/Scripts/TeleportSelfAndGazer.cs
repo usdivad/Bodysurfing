@@ -85,6 +85,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 
 	public void Reset() {
 		transform.localPosition = this.startingPosition;
+		Debug.Log("TeleportSelfAndGazer::Reset()");
 	}
 
 	public void ToggleVRMode() {
@@ -123,6 +124,8 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 
 		// Teleport gazer avatar to gazer's previous position
 		//GameObject.Find("Gazer Avatar").transform.localPosition = gazer.GetMostRecentGazePosition();
+
+		Debug.Log ("TeleportSelfAndGazer::Teleport()");
 	}
 
 	#region IGvrGazeResponder implementation

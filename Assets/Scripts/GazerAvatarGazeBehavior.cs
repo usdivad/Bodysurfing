@@ -19,7 +19,7 @@ public class GazerAvatarGazeBehavior : MonoBehaviour {
 	void Start () {
 		this.framesGazedAt = 0;
 		this.isGazedAt = false;
-		this.startingScale = this.transform.localPosition;
+		this.startingScale = this.transform.localScale;
 	}
 	
 	// Update is called once per frame
@@ -58,7 +58,33 @@ public class GazerAvatarGazeBehavior : MonoBehaviour {
 		// Teleport gazer
 		CameraBehavior gazer = GameObject.Find ("Main Camera").GetComponent<CameraBehavior>();
 		//Vector3 gazerPrevPosition = GameObject.Find ("Main Camera").transform.localPosition;
-		gazer.SetMostRecentTeleportPosition (transform.localPosition);
+		Vector3 gazerPrevPosition = gazer.transform.position;
+		Debug.Log ("gazerPrevPosition before: " + gazerPrevPosition);
+
+
+		float distanceOffset = this.distanceThreshold;
+		float distance = (gazer.transform.position - this.transform.position).magnitude;
+
+		if (distance < this.distanceThreshold) {
+			if (gazerPrevPosition.x < this.transform.position.x) {
+				gazerPrevPosition.x -= distanceOffset;
+			}
+			else {
+				gazerPrevPosition.x += distanceOffset;
+			}
+
+			if (gazerPrevPosition.z < this.transform.position.z) {
+				gazerPrevPosition.z -= distanceOffset;
+			}
+			else {
+				gazerPrevPosition.z += distanceOffset;
+			}
+		}
+		Debug.Log ("gazerPrevPosition after: " + gazerPrevPosition);
+
+
+		gazer.SetMostRecentTeleportPosition (gazerPrevPosition);
+		//gazer.SetMostRecentAvatarPosition (gazerPrevPosition);
 		gazer.SetShouldTeleport (true);
 
 		// Teleport self outside world bounds (disappear)

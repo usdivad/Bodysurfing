@@ -77,6 +77,7 @@ public class GameBehavior : MonoBehaviour {
 			Transform entity = this.entities [i];
 
 			if (cameraBehavior.GetIsDisembodied ()) {
+				// Set camera's most recent converser
 				entity.GetComponent<TargetWatcherBehavior> ().SetBypass(false);
 				bool isAboutToConverse = entity.GetComponent<TeleportSelfAndGazer> ().GetIsAboutToConverse ();
 				if (isAboutToConverse) {
@@ -84,11 +85,19 @@ public class GameBehavior : MonoBehaviour {
 				}
 			}
 			else {
+				// Set camera's most recent gazed at entity
 				entity.GetComponent<TargetWatcherBehavior> ().SetBypass(true);
 				bool isGazedAt = entity.GetComponent<TeleportSelfAndGazer> ().GetIsGazedAt ();
 				if (isGazedAt) {
 					cameraIsGazingAt = i;
 					// break;
+				}
+
+				// Reset position if out of bounds
+				// TODO: Track down the root cause of this bug; probably to do with conflicting teleport/gaze settings
+				if (!this.PositionIsInWorldBoundaries(entity.position))
+				{
+					entity.GetComponent<TeleportSelfAndGazer> ().Reset ();
 				}
 			}
 		}
@@ -97,7 +106,9 @@ public class GameBehavior : MonoBehaviour {
 	}
 
 	public void SetEntityPosition(int i, Vector3 pos) { // Previously "TeleportEntity()"
+		Vector3 posPrev = this.entities[i].position;
 		this.entities [i].position = pos;
+		Debug.Log ("entity " + i + ": " + posPrev + "->" + pos);
 	}
 
 	public Vector3 GetEntityPosition(int i) {
