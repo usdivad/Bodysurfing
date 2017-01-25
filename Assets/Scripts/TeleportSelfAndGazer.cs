@@ -117,7 +117,7 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		transform.localPosition = new Vector3 (25, 0, 0);
 
 		// Teleport gazer avatar to gazer's previous position
-		GameObject.Find("Gazer Avatar").transform.localPosition = gazer.GetMostRecentGazePosition();
+		//GameObject.Find("Gazer Avatar").transform.localPosition = gazer.GetMostRecentGazePosition();
 	}
 
 	#region IGvrGazeResponder implementation

@@ -11,6 +11,7 @@ public class CameraBehavior : MonoBehaviour {
 
 	private float curVel;
 	private float curVelMultiplier;
+	private Vector3 initialPosition;
 	private Vector3 mostRecentForward;
 	private Vector3 mostRecentGazePosition; // Last position we were at before we started gazing
 	private int mostRecentGazeIndex; // Last entity we gazed at while not disembodied
@@ -28,6 +29,7 @@ public class CameraBehavior : MonoBehaviour {
 	void Start () {
 		this.curVel = this.minVel;
 		this.curVelMultiplier = 1.0f;
+		this.initialPosition = this.GetComponent<Transform> ().position;
 		this.mostRecentForward = new Vector3 (0, 0, 0);
 		this.mostRecentGazePosition = new Vector3 (0, 0, 0);
 		this.mostRecentGazeIndex = -1;
@@ -57,7 +59,11 @@ public class CameraBehavior : MonoBehaviour {
 			this.isDisembodied = !this.isDisembodied;
 			this.framesDisembodied = 0;
 
-			if (!this.isDisembodied) {
+			// Adjust avatar positions
+			if (this.isDisembodied) {
+				GameObject.Find ("Gazer Avatar").transform.localPosition = this.initialPosition;
+			}
+			else {
 				GameObject.Find ("Gazer Avatar").transform.localPosition = new Vector3 (25, 0, 0);
 				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().SetEntityPosition (this.mostRecentGazeIndex, this.transform.position);
 			}
@@ -116,6 +122,7 @@ public class CameraBehavior : MonoBehaviour {
 			}
 			else {
 				this.curVel = 0;
+				pos = this.initialPosition;
 			}
 		}
 
