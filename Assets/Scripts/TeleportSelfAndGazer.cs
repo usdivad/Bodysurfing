@@ -43,14 +43,26 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 	void Update() {
 		CameraBehavior gazer = GameObject.Find ("Main Camera").GetComponent<CameraBehavior>();
 
-		// Update how long we've been gazed at
-		if (this.isGazedAt && !gazer.GetIsDisembodied()) {
-			this.framesGazedAt++;
+		// Update rotation and gazed frame count
+		if (!gazer.GetIsDisembodied ()) {
+			Quaternion lookRot = Quaternion.LookRotation (gazer.transform.forward); // Face same direction as camera
+
+			// Update how long we've been gazed at
+			if (this.isGazedAt) {
+				this.framesGazedAt++;
+			}
+			else {
+				lookRot = Quaternion.LookRotation (new Vector3(0, 0, 0)); // Face towards center (or rather, original)
+			}
+
+			// Adjust rotation by lerping
+			this.transform.rotation = Quaternion.Lerp (this.transform.rotation, lookRot, 0.05f);
+
 			//Debug.Log ("framesGAzedAt: " + this.framesGazedAt);
 		}
 
 		// Adjust dimensions based on gazed time
-		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * (scaleFactor * this.startingScale) + this.startingScale;
+		transform.localScale = ((float) this.framesGazedAt / this.framesGazedAtThreshold) * (this.scaleFactor * this.startingScale) + this.startingScale;
 
 		// Teleport if we're over the gazed threshold
 		if (this.framesGazedAt >= this.framesGazedAtThreshold) {
