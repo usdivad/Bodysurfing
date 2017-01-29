@@ -196,6 +196,10 @@ public class CameraBehavior : MonoBehaviour {
 		return this.mostRecentGazePosition;
 	}
 
+	public int GetMostRecentGazeIndex() {
+		return this.mostRecentGazeIndex;
+	}
+
 	public bool GetIsDisembodied() {
 		return this.isDisembodied;
 	}

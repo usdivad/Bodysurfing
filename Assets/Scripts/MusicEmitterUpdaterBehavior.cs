@@ -25,9 +25,17 @@ public class MusicEmitterUpdaterBehavior : MonoBehaviour {
 		float timeSinceTeleportation = Mathf.Min (cameraBehavior.GetFramesSinceLastTeleportation () / framesSinceLastTeleportationThreshold, 1.0f);
 		//float gazeAmount = cameraBehavior.GetGazeAmount ();
 		float isDisembodiedFloat = cameraBehavior.GetIsDisembodied() ? 1.0f : 0.0f;
+		float characterIndex = cameraBehavior.GetMostRecentGazeIndex () + 1.01f; // Offset since Eve is 0.0-1.0
 
-		emitter.SetParameter ("Rotation Offset", rotationOffset);
-		emitter.SetParameter ("Time Since Teleportation", timeSinceTeleportation);
-		emitter.SetParameter ("Is Disembodied?", isDisembodiedFloat);
+		// For GazerAmbience
+		//emitter.SetParameter ("Rotation Offset", rotationOffset);
+		//emitter.SetParameter ("Time Since Teleportation", timeSinceTeleportation);
+		//emitter.SetParameter ("Is Disembodied?", isDisembodiedFloat);
+
+		// For AllCharactersMain
+		emitter.SetParameter("timeSinceTeleportation", timeSinceTeleportation);
+		emitter.SetParameter ("characterIndex", characterIndex);
+
+		Debug.Log ("time since teleportation: " + timeSinceTeleportation + ", character idx: " + characterIndex);
 	}
 }
