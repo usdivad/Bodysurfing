@@ -9,6 +9,7 @@ using System.Collections;
 public class AttacherBehavior : MonoBehaviour {
 	public GameObject entityAttachedTo;
 	public float positionOffset;
+	public bool rotateSelfToFaceEntity;
 
 	// Use this for initialization
 	void Start () {
@@ -23,8 +24,10 @@ public class AttacherBehavior : MonoBehaviour {
 		this.transform.position = entityPos + (entityFwd * this.positionOffset);
 
 		// Rotate us in the right direction (this is only for the dialogue text at the moment)
-		//this.transform.LookAt(entityFwd * -1);
-		//this.transform.LookAt (this.transform.position - entityPos);
-		this.transform.rotation = Quaternion.LookRotation(this.transform.position - entityPos); // Face the entity
+		if (this.rotateSelfToFaceEntity) {
+			//this.transform.LookAt(entityFwd * -1);
+			//this.transform.LookAt (this.transform.position - entityPos);
+			this.transform.rotation = Quaternion.LookRotation(this.transform.position - entityPos); // Face the entity
+		}
 	}
 }
