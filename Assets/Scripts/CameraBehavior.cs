@@ -4,6 +4,7 @@
  */
 
 using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class CameraBehavior : MonoBehaviour {
@@ -56,6 +57,7 @@ public class CameraBehavior : MonoBehaviour {
 		Vector3 pos = transform.position;
 		// Debug.Log ("euler angles: " + transform.localEulerAngles);
 		this.framesSinceLastTeleportation++;
+		string dialogueLine = "";
 
 		// Teleport if necessary
 		if (this.shouldTeleport) {
@@ -120,8 +122,9 @@ public class CameraBehavior : MonoBehaviour {
 					//this.curVel = 0;
 					this.curVel = Mathf.Max(this.curVel - this.minVel, 0f);
 
-					// Converse!
-					GameObject.Find("Dialogue Manager").GetComponent<DialogueBehavior>().ConverseCharacters(this.mostRecentGazeIndex + 1, this.mostRecentConverserIndex + 1);
+					// Converse! (Update dialogue line)
+					//GameObject.Find("Dialogue Manager").GetComponent<DialogueBehavior>().ConverseCharacters(this.mostRecentGazeIndex + 1, this.mostRecentConverserIndex + 1);
+					dialogueLine = GameObject.Find("Dialogue Manager").GetComponent<DialogueBehavior>().GetDialogueForCharacter(this.mostRecentGazeIndex + 1, this.mostRecentConverserIndex + 1);
 				}
 			}
 		}
@@ -151,6 +154,9 @@ public class CameraBehavior : MonoBehaviour {
 		if (GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().PositionIsInWorldBoundaries (pos)) {
 			transform.position = pos;
 		}
+
+		// Set dialogue text (either converser dialogue or empty string)
+		GameObject.Find ("Dialogue Text").GetComponent<Text> ().text = dialogueLine;
 			
 		Debug.Log ("camera: most recent gaze idx: " + this.mostRecentGazeIndex + ", most recent converser idx: " + this.mostRecentConverserIndex);
 	}
