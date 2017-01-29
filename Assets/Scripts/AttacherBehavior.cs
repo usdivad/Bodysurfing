@@ -17,5 +17,9 @@ public class AttacherBehavior : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		this.transform.position = this.entityAttachedTo.transform.position;
+
+		// TODO:
+		// - Position offsets
+		// - Rotations (for text)
 	}
 }
