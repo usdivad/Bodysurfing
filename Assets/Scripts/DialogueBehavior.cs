@@ -62,10 +62,22 @@ public class DialogueBehavior : MonoBehaviour {
 	}
 
 	// Returns the dialogue line based on player and speakers' character indexes
-	string GetDialogueForCharacter(int playerIndex, int speakerIndex)
+	public string GetDialogueForCharacter(int playerIndex, int speakerIndex)
 	{
 		List<string> dialogueRow = this.dialogueData [playerIndex];
 		string dialogueLine = dialogueRow [INTERACTION_INDEX_OFFSET + speakerIndex];
 		return dialogueLine;
+	}
+
+	public void ConverseCharacters(int playerIndex, int speakerIndex)
+	{
+		if (playerIndex < 0 || playerIndex >= this.dialogueData.Count ||
+			speakerIndex < 0 || speakerIndex >= this.dialogueData.Count)
+		{
+			return;
+		}
+		string dialogueLine = this.GetDialogueForCharacter(playerIndex, speakerIndex);
+		string speakerName = dialogueData [speakerIndex] [(int)HeaderLabels.kName];
+		Debug.Log (speakerName.ToUpper () + ": " + dialogueLine);
 	}
 }

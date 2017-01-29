@@ -115,10 +115,13 @@ public class CameraBehavior : MonoBehaviour {
 				//this.curVel *= Mathf.Min(Mathf.Max ((converserDistance - this.converserDistanceThreshold) * 1.0f, 0f), 1f);
 				//this.curVel = Mathf.Max(this.curVel - this.minVel, 0f);
 
-				// Grind to a halt
+				// Grind to a halt and display dialogue
 				if (converserDistance < this.converserDistanceThreshold) {
 					//this.curVel = 0;
 					this.curVel = Mathf.Max(this.curVel - this.minVel, 0f);
+
+					// Converse!
+					GameObject.Find("Dialogue Manager").GetComponent<DialogueBehavior>().ConverseCharacters(this.mostRecentGazeIndex + 1, this.mostRecentConverserIndex + 1);
 				}
 			}
 		}
@@ -148,7 +151,7 @@ public class CameraBehavior : MonoBehaviour {
 		if (GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().PositionIsInWorldBoundaries (pos)) {
 			transform.position = pos;
 		}
-
+			
 		Debug.Log ("camera: most recent gaze idx: " + this.mostRecentGazeIndex + ", most recent converser idx: " + this.mostRecentConverserIndex);
 	}
 
