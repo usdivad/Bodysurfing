@@ -131,6 +131,9 @@ public class CameraBehavior : MonoBehaviour {
 				this.curVel = 0;
 				pos = this.initialPosition;
 			}
+
+			// Also, update character index
+			//this.mostRecentGazeIndex = -1;
 		}
 
 		// Create movement vector
@@ -199,6 +202,9 @@ public class CameraBehavior : MonoBehaviour {
 	public int GetMostRecentGazeIndex() {
 		return this.mostRecentGazeIndex;
 	}
+//	public void SetMostRecentGazeIndex(int idx) {
+//		this.mostRecentGazeIndex = idx;
+//	}
 
 	public bool GetIsDisembodied() {
 		return this.isDisembodied;

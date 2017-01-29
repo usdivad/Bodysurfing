@@ -25,7 +25,8 @@ public class MusicEmitterUpdaterBehavior : MonoBehaviour {
 		float timeSinceTeleportation = Mathf.Min (cameraBehavior.GetFramesSinceLastTeleportation () / framesSinceLastTeleportationThreshold, 1.0f);
 		//float gazeAmount = cameraBehavior.GetGazeAmount ();
 		float isDisembodiedFloat = cameraBehavior.GetIsDisembodied() ? 1.0f : 0.0f;
-		float characterIndex = cameraBehavior.GetMostRecentGazeIndex () + 1.01f; // Offset since Eve is 0.0-1.0
+		float characterIndex = (cameraBehavior.GetIsDisembodied() ? cameraBehavior.GetMostRecentGazeIndex () : -1.0f) // Either character at most recent gazed index, or Eve character itself
+								+ 1.01f; // Offset since Eve is 0.0-1.0
 
 		// For GazerAmbience
 		//emitter.SetParameter ("Rotation Offset", rotationOffset);
