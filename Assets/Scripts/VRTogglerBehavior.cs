@@ -6,6 +6,7 @@ using UnityEngine;
 using System.Collections;
 
 public class VRTogglerBehavior : MonoBehaviour {
+	public bool initialVRMode;
 
 	private bool isGazedAt;
 	private int framesGazedAtThreshold;
@@ -16,6 +17,8 @@ public class VRTogglerBehavior : MonoBehaviour {
 		this.isGazedAt = false;
 		this.framesGazedAtThreshold = 60;
 		this.framesGazedAt = 0;
+
+		GvrViewer.Instance.VRModeEnabled = this.initialVRMode;
 	}
 	
 	// Update is called once per frame
