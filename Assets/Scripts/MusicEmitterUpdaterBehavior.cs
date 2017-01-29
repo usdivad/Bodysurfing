@@ -37,6 +37,6 @@ public class MusicEmitterUpdaterBehavior : MonoBehaviour {
 		emitter.SetParameter("timeSinceTeleportation", timeSinceTeleportation);
 		emitter.SetParameter ("characterIndex", characterIndex);
 
-		Debug.Log ("time since teleportation: " + timeSinceTeleportation + ", character idx: " + characterIndex);
+		//Debug.Log ("time since teleportation: " + timeSinceTeleportation + ", character idx: " + characterIndex);
 	}
 }
