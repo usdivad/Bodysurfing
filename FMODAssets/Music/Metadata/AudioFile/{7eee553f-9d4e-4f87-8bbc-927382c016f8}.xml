@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.01.08.00">
-    <object class="AudioFile" id="{c1936012-1e52-4027-9f89-5f0949315ce6}">
+    <object class="AudioFile" id="{7eee553f-9d4e-4f87-8bbc-927382c016f8}">
         <property name="assetPath">
-            <value>kino_transition.wav</value>
+            <value>pyotr_transition.wav</value>
         </property>
         <property name="frequencyInKHz">
             <value>44.0999985</value>
