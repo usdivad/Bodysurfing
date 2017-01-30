@@ -40,6 +40,10 @@ fmod_editor.log
 fmod.log
 Assets/FMODStudioCache.asset
 Assets/Cubits Low Poly Character Maker*
+Assets/ADG_Textures*
+Assets/Ornamental Flower Set*
+Assets/TreasureChest_01*
+Assets/Wood texture floor_01*
 
 # ============ #
 # Project dirs #
@@ -57,3 +61,4 @@ FMODAssets/Music/CpaghettiMockBounces*
 *.app
 Assets/LooperRec.*
 permgram.py
+4DOM
