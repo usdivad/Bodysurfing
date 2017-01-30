@@ -50,6 +50,8 @@ public class CameraBehavior : MonoBehaviour {
 
 		this.isDisembodied = false;
 		this.framesDisembodied = 0;
+
+		GameObject.Find ("Gazer Avatar").transform.localPosition = new Vector3 (0, -100, 0);
 	}
 	
 	// Update is called once per frame
@@ -72,10 +74,17 @@ public class CameraBehavior : MonoBehaviour {
 			// Adjust avatar positions
 			if (this.isDisembodied) {
 				GameObject.Find ("Gazer Avatar").transform.localPosition = this.initialPosition;
+				//GameObject.Find ("Gazer Avatar").GetComponent<GazerAvatarGazeBehavior> ().MoveSelfAndChildrenTo (this.initialPosition);
+				//GameObject.Find ("TreasuerChest_(LOD)").transform.position = this.initialPosition;
+
+
 				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().SetEntityPosition (this.mostRecentGazeIndex, new Vector3(25, 0, 0));
 			}
 			else {
-				GameObject.Find ("Gazer Avatar").transform.localPosition = new Vector3 (25, 0, 0);
+				GameObject.Find ("Gazer Avatar").transform.localPosition = new Vector3 (0, -100, 0);
+				//GameObject.Find ("Gazer Avatar").GetComponent<GazerAvatarGazeBehavior> ().MoveSelfAndChildrenTo (new Vector3(25, 0, 0));
+				//GameObject.Find ("TreasuerChest_(LOD)").transform.position = new Vector3(25, 0, 0);
+
 				GameObject.Find ("Entity Manager").GetComponent<GameBehavior>().SetEntityPosition (this.mostRecentGazeIndex, pos);
 			}
 

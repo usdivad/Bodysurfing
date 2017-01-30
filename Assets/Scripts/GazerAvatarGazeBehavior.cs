@@ -90,4 +90,13 @@ public class GazerAvatarGazeBehavior : MonoBehaviour {
 		// Teleport self outside world bounds (disappear)
 		//transform.localPosition = new Vector3 (25, 0, 0);
 	}
+
+	public void MoveSelfAndChildrenTo(Vector3 pos) {
+		this.transform.position = pos;
+		Transform[] myChildren = GetComponentsInChildren<Transform> ();
+		for (int i=0; i<myChildren.Length; i++) {
+			myChildren [i].position = pos;
+			Debug.Log (i);
+		}
+	}
 }
