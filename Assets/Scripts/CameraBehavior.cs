@@ -24,6 +24,7 @@ public class CameraBehavior : MonoBehaviour {
 	private int mostRecentConverserIndex; // Last entity about to engage in conversation with us
 
 	private bool isGazing;
+	private bool isConversing;
 	private Vector3 mostRecentTeleportPosition; // Last position we teleported to
 	private bool shouldTeleport;
 	private int framesSinceLastTeleportation;
@@ -42,6 +43,7 @@ public class CameraBehavior : MonoBehaviour {
 		this.mostRecentConverserIndex = -1;
 
 		this.isGazing = false;
+		this.isConversing = false;
 		this.mostRecentTeleportPosition = new Vector3 (0, 0, 0);
 		this.shouldTeleport = false;
 		this.framesSinceLastTeleportation = 0;
@@ -58,6 +60,7 @@ public class CameraBehavior : MonoBehaviour {
 		// Debug.Log ("euler angles: " + transform.localEulerAngles);
 		this.framesSinceLastTeleportation++;
 		string dialogueLine = "";
+		this.isConversing = false;
 
 		// Teleport if necessary
 		if (this.shouldTeleport) {
@@ -125,6 +128,8 @@ public class CameraBehavior : MonoBehaviour {
 					// Converse! (Update dialogue line)
 					//GameObject.Find("Dialogue Manager").GetComponent<DialogueBehavior>().ConverseCharacters(this.mostRecentGazeIndex + 1, this.mostRecentConverserIndex + 1);
 					dialogueLine = GameObject.Find("Dialogue Manager").GetComponent<DialogueBehavior>().GetDialogueForCharacter(this.mostRecentGazeIndex + 1, this.mostRecentConverserIndex + 1);
+					this.isConversing = true;
+					//GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().PlayEntityTransitionalFragment (this.mostRecentConverserIndex);
 				}
 			}
 		}
@@ -157,6 +162,9 @@ public class CameraBehavior : MonoBehaviour {
 
 		// Set dialogue text (either converser dialogue or empty string)
 		GameObject.Find ("Dialogue Text").GetComponent<Text> ().text = dialogueLine;
+
+		// Play interaction fragment music
+		GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().PlayEntityTransitionalFragment (this.isConversing ? this.mostRecentConverserIndex : -1);
 			
 		Debug.Log ("camera: most recent gaze idx: " + this.mostRecentGazeIndex + ", most recent converser idx: " + this.mostRecentConverserIndex);
 	}
@@ -178,6 +186,10 @@ public class CameraBehavior : MonoBehaviour {
 
 	public void SetIsAboutToConverseWith(int converserIndex) {
 		this.mostRecentConverserIndex = converserIndex;
+	}
+
+	public bool GetIsConversing() {
+		return this.isConversing;
 	}
 
 	public float GetCurVelMultiplier() {
@@ -214,6 +226,10 @@ public class CameraBehavior : MonoBehaviour {
 //	public void SetMostRecentGazeIndex(int idx) {
 //		this.mostRecentGazeIndex = idx;
 //	}
+
+	public int GetMostRecentConverserIndex() {
+		return this.mostRecentConverserIndex;
+	}
 
 	public bool GetIsDisembodied() {
 		return this.isDisembodied;

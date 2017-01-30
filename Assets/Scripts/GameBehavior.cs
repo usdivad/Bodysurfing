@@ -124,4 +124,13 @@ public class GameBehavior : MonoBehaviour {
 		}
 		return true;
 	}
+
+	public void PlayEntityTransitionalFragment(int entityIdx) {
+		for (int i = 0; i < this.entities.Length; i++) {
+			this.entities [i].GetComponent<FMODUnity.StudioEventEmitter> ().SetParameter ("conversingWith", i == entityIdx ? 1.0f : 0.0f);
+			if (i == entityIdx) {
+				Debug.Log ("playing " + i + "!");
+			}
+		}
+	}
 }
