@@ -19,15 +19,25 @@ public class TransitionalFragmentUpdaterBehavior : MonoBehaviour {
 		GameObject mainCamera = GameObject.Find ("Main Camera");
 		CameraBehavior cameraBehavior = mainCamera.GetComponent<CameraBehavior> ();
 		//int gazeIdx = cameraBehavior.GetMostRecentGazeIndex();
+		int gazeFrames = 0;
+		int gazeFramesThreshold = 20;
 
 		// TODO: Fix this so that the tail of the fragment doesn't get cut off
 		//if (cameraBehavior.GetIsDisembodied()) {
 		//	return;
 		//}
 
-		Transform gazeEntity = GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().GetEntity (this.entityIdx);
-		int gazeFrames = gazeEntity.GetComponent<TeleportSelfAndGazer> ().GetFramesGazedAt ();
-
+		// Query the number of frames gazed at, then set our emitter's parameter
+		if (entityIdx < 0) { // Eve (Gazer)
+			gazeFrames = GameObject.Find("Gazer Avatar").GetComponent<GazerAvatarGazeBehavior>().GetFramesGazedAt();
+			if (!cameraBehavior.GetIsDisembodied() && cameraBehavior.GetFramesSinceLastTeleportation () < gazeFramesThreshold) {
+				return;
+			}
+		}
+		else { // Everyone else
+			Transform gazeEntity = GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().GetEntity (this.entityIdx);
+			gazeFrames = gazeEntity.GetComponent<TeleportSelfAndGazer> ().GetFramesGazedAt ();
+		}
 		this.GetComponent<FMODUnity.StudioEventEmitter> ().SetParameter ("framesGazedAt", gazeFrames);
 	}
 }

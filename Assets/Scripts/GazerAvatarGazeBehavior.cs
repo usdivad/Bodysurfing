@@ -99,4 +99,8 @@ public class GazerAvatarGazeBehavior : MonoBehaviour {
 			Debug.Log (i);
 		}
 	}
+
+	public int GetFramesGazedAt() {
+		return this.framesGazedAt;
+	}
 }
