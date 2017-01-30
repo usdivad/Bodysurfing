@@ -133,4 +133,8 @@ public class GameBehavior : MonoBehaviour {
 			}
 		}
 	}
+
+	public Transform GetEntity(int i) {
+		return this.entities[i];
+	}
 }

@@ -87,6 +87,10 @@ public class TeleportSelfAndGazer : MonoBehaviour, IGvrGazeResponder {
 		GetComponent<Renderer>().material.color = gazedAt ? Color.magenta : Color.white;
 	}
 
+	public int GetFramesGazedAt() {
+		return this.framesGazedAt;
+	}
+
 	public bool GetIsAboutToConverse() {
 		return this.isAboutToConverse;
 	}
