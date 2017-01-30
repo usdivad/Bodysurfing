@@ -143,9 +143,10 @@ public class CameraBehavior : MonoBehaviour {
 			}
 		}
 		else {
-			// ... or steadily back away if I'm gazing
+			// ... or move fwd at a steady pace if I'm gazing
 			if (this.isGazing) {
-				this.curVel = this.minVel * -1;
+				//this.curVel = this.minVel;
+				this.curVel += (this.velStep * 0.15f);
 			}
 			else {
 				this.curVel = 0;
