@@ -21,9 +21,9 @@ public class TransitionalFragmentUpdaterBehavior : MonoBehaviour {
 		//int gazeIdx = cameraBehavior.GetMostRecentGazeIndex();
 
 		// TODO: Fix this so that the tail of the fragment doesn't get cut off
-		if (cameraBehavior.GetIsDisembodied()) {
-			return;
-		}
+		//if (cameraBehavior.GetIsDisembodied()) {
+		//	return;
+		//}
 
 		Transform gazeEntity = GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().GetEntity (this.entityIdx);
 		int gazeFrames = gazeEntity.GetComponent<TeleportSelfAndGazer> ().GetFramesGazedAt ();
