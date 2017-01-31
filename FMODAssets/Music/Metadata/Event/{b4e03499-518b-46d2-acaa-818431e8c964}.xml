@@ -285,9 +285,6 @@
         <property name="length">
             <value>3</value>
         </property>
-        <property name="quantizationInterval">
-            <value>5</value>
-        </property>
         <relationship name="timeline">
             <destination>{3af1b323-a02a-43ac-bfcc-0c2f1bcde313}</destination>
         </relationship>

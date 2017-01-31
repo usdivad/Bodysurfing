@@ -460,9 +460,6 @@
         <property name="length">
             <value>6</value>
         </property>
-        <property name="quantizationInterval">
-            <value>5</value>
-        </property>
         <relationship name="timeline">
             <destination>{d0932651-3ff2-4876-91ba-570123989948}</destination>
         </relationship>
@@ -547,9 +544,6 @@
         </property>
         <property name="length">
             <value>6</value>
-        </property>
-        <property name="quantizationInterval">
-            <value>5</value>
         </property>
         <relationship name="timeline">
             <destination>{d0932651-3ff2-4876-91ba-570123989948}</destination>
@@ -636,9 +630,6 @@
         <property name="length">
             <value>6</value>
         </property>
-        <property name="quantizationInterval">
-            <value>5</value>
-        </property>
         <relationship name="timeline">
             <destination>{d0932651-3ff2-4876-91ba-570123989948}</destination>
         </relationship>
@@ -724,9 +715,6 @@
         <property name="length">
             <value>6</value>
         </property>
-        <property name="quantizationInterval">
-            <value>5</value>
-        </property>
         <relationship name="timeline">
             <destination>{d0932651-3ff2-4876-91ba-570123989948}</destination>
         </relationship>
@@ -808,9 +796,6 @@
         </property>
         <property name="length">
             <value>6</value>
-        </property>
-        <property name="quantizationInterval">
-            <value>5</value>
         </property>
         <relationship name="timeline">
             <destination>{d0932651-3ff2-4876-91ba-570123989948}</destination>
@@ -980,9 +965,6 @@
         </property>
         <property name="length">
             <value>6</value>
-        </property>
-        <property name="quantizationInterval">
-            <value>5</value>
         </property>
         <relationship name="timeline">
             <destination>{d0932651-3ff2-4876-91ba-570123989948}</destination>

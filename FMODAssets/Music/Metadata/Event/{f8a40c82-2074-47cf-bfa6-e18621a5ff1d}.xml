@@ -1374,9 +1374,6 @@
         <property name="length">
             <value>6</value>
         </property>
-        <property name="quantizationInterval">
-            <value>5</value>
-        </property>
         <relationship name="timeline">
             <destination>{891dd83c-dba1-4e99-a33e-5ec95284083b}</destination>
         </relationship>
@@ -1396,9 +1393,6 @@
         </property>
         <property name="length">
             <value>6</value>
-        </property>
-        <property name="quantizationInterval">
-            <value>5</value>
         </property>
         <relationship name="timeline">
             <destination>{891dd83c-dba1-4e99-a33e-5ec95284083b}</destination>
@@ -1420,9 +1414,6 @@
         <property name="length">
             <value>6</value>
         </property>
-        <property name="quantizationInterval">
-            <value>5</value>
-        </property>
         <relationship name="timeline">
             <destination>{891dd83c-dba1-4e99-a33e-5ec95284083b}</destination>
         </relationship>
@@ -1443,9 +1434,6 @@
         <property name="length">
             <value>6</value>
         </property>
-        <property name="quantizationInterval">
-            <value>5</value>
-        </property>
         <relationship name="timeline">
             <destination>{891dd83c-dba1-4e99-a33e-5ec95284083b}</destination>
         </relationship>
@@ -1465,9 +1453,6 @@
         </property>
         <property name="length">
             <value>6</value>
-        </property>
-        <property name="quantizationInterval">
-            <value>5</value>
         </property>
         <relationship name="timeline">
             <destination>{891dd83c-dba1-4e99-a33e-5ec95284083b}</destination>
@@ -1847,9 +1832,6 @@
         </property>
         <property name="length">
             <value>6</value>
-        </property>
-        <property name="quantizationInterval">
-            <value>5</value>
         </property>
         <relationship name="timeline">
             <destination>{891dd83c-dba1-4e99-a33e-5ec95284083b}</destination>
