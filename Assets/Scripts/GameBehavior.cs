@@ -37,13 +37,13 @@ public class GameBehavior : MonoBehaviour {
 			if (x < 0 && x > positionOffset * -1) {
 				x -= positionOffset;
 			}
-			else if (x < positionOffset) {
+			else if (x >= 0 && x < positionOffset) {
 				x += positionOffset;
 			}
 			if (z < 0 && z > positionOffset * -1) {
 				z -= positionOffset;
 			}
-			else if (z < positionOffset) {
+			else if (z >= 0 && z < positionOffset) {
 				z += positionOffset;
 			}
 			Transform entityType = entityTypes [i];
