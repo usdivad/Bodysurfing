@@ -30,9 +30,9 @@ public class TransitionalFragmentUpdaterBehavior : MonoBehaviour {
 		// Query the number of frames gazed at, then set our emitter's parameter
 		if (entityIdx < 0) { // Eve (Gazer)
 			gazeFrames = GameObject.Find("Gazer Avatar").GetComponent<GazerAvatarGazeBehavior>().GetFramesGazedAt();
-			if (!cameraBehavior.GetIsDisembodied() && cameraBehavior.GetFramesSinceLastTeleportation () < teleportationFramesThreshold) {
-				return;
-			}
+			//if (!cameraBehavior.GetIsDisembodied() && cameraBehavior.GetFramesSinceLastTeleportation () < teleportationFramesThreshold) {
+			//	return;
+			//}
 		}
 		else { // Everyone else
 			Transform gazeEntity = GameObject.Find ("Entity Manager").GetComponent<GameBehavior> ().GetEntity (this.entityIdx);
