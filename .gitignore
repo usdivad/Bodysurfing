@@ -60,5 +60,7 @@ FMODAssets/Music/CpaghettiMockBounces*
 *.bank.meta
 *.app
 Assets/LooperRec.*
+*.csv
+*.csv.meta
 permgram.py
 4DOM

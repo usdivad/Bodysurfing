@@ -2,10 +2,11 @@
 //using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using Mono.Csv;
 
 public class DialogueBehavior : MonoBehaviour {
-	public string pathToDialogueCsv;
+	public string pathToDialogueCsv; // RELATIVE to StreamingAssets folder (so atm just the filename)
 	private List<string> dialogueHeader;
 	private List<List<string>> dialogueData;
 	private const int INTERACTION_INDEX_OFFSET = 4;
@@ -43,7 +44,8 @@ public class DialogueBehavior : MonoBehaviour {
 	void LoadDataFromCsvPath(string path)
 	{
 		// Read CSV from path
-		List<List<string>> data = CsvFileReader.ReadAll (path, System.Text.Encoding.GetEncoding ("utf-16"));
+		string fullPath = Path.Combine(Application.streamingAssetsPath, path);
+		List<List<string>> data = CsvFileReader.ReadAll (fullPath, System.Text.Encoding.GetEncoding ("utf-16"));
 		List<string> header = data [0];
 		Debug.Log (data [0][1]);
 
